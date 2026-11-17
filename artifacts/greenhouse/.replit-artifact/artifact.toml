@@ -1,0 +1,28 @@
+kind = "data-app"
+previewPath = "/"
+title = "Verdant — Greenhouse dashboard"
+description = "A polished greenhouse growth dashboard with realistic mock plant data, growth trends, environmental conditions, and plant health monitoring."
+version = "1.0.0"
+id = "artifacts/greenhouse"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23881
+
+[services.development]
+run = "pnpm --filter @workspace/greenhouse run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/greenhouse", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/greenhouse/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23881"
+BASE_PATH = "/"
