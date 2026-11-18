@@ -1,4 +1,4 @@
-// Deterministic DEMO data for Verdant. Not connected to any sensors.
+// Deterministic DEMO data for Greenhouse #003. Not connected to any sensors.
 export type ZoneId = "propagation" | "fruiting" | "herb" | "nursery";
 export type Health = "thriving" | "watch" | "stressed";
 export type Stage = "Seedling" | "Vegetative" | "Flowering" | "Fruiting" | "Hardening off";

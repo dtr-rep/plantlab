@@ -225,7 +225,7 @@ export default function Dashboard() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-[22px] font-semibold tracking-tight">Verdant</h1>
+                <h1 className="text-[22px] font-semibold tracking-tight">Greenhouse #003</h1>
                 <span data-testid="badge-demo" className="rounded-full border border-[#C98A6E]/50 bg-[#F3E2DA] px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-[.12em] text-[#9E5640]">Demo data</span>
               </div>
               <p className="text-xs text-muted-foreground">Hollins Lane Growers · sample records, not live sensors</p>
@@ -282,7 +282,7 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.55fr_1fr]">
           <Card id="growth" title="Canopy height by species" meta={`Count-weighted mean height, cm · ${rangeLabel} · tap species to compare`}
-            actions={<CsvButton testId="export-species" onClick={() => downloadCsv(`verdant-species-height-${fileTag}.csv`, [["date", ...species], ...speciesSeries.map((r) => [r.date, ...species.map((s) => r[s] ?? "")])])} />}>
+            actions={<CsvButton testId="export-species" onClick={() => downloadCsv(`greenhouse-003-species-height-${fileTag}.csv`, [["date", ...species], ...speciesSeries.map((r) => [r.date, ...species.map((s) => r[s] ?? "")])])} />}>
             <div className="no-print mb-3 flex flex-wrap gap-1.5">
               {species.map((s, i) => {
                 const off = hidden.has(s);
@@ -311,7 +311,7 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-1">
             <Card title="Growth by zone" meta={`Mean cm gained per plant · ${range} days`}
-              actions={<CsvButton testId="export-zones" onClick={() => downloadCsv(`verdant-zone-growth-${fileTag}.csv`, [["zone", "mean_growth_cm"], ...zoneBars.map((z) => [z.name, z.growth])])} />}>
+              actions={<CsvButton testId="export-zones" onClick={() => downloadCsv(`greenhouse-003-zone-growth-${fileTag}.csv`, [["zone", "mean_growth_cm"], ...zoneBars.map((z) => [z.name, z.growth])])} />}>
               <div className="h-[170px]">
                 <ResponsiveContainer width="100%" height="100%" debounce={0}>
                   <BarChart data={zoneBars} margin={{ top: 4, right: 4, left: -18, bottom: 0 }}>
@@ -326,7 +326,7 @@ export default function Dashboard() {
               </div>
             </Card>
             <Card title="Health mix" meta="Plants by current assessment"
-              actions={<CsvButton testId="export-health" onClick={() => downloadCsv(`verdant-health-${zone}.csv`, [["status", "plants"], ...healthMix.map((h) => [h.name, h.value])])} />}>
+              actions={<CsvButton testId="export-health" onClick={() => downloadCsv(`greenhouse-003-health-${zone}.csv`, [["status", "plants"], ...healthMix.map((h) => [h.name, h.value])])} />}>
               <div className="flex flex-col items-center gap-4 min-[480px]:flex-row">
                 <div className="relative h-[150px] w-[150px] shrink-0">
                   <ResponsiveContainer width="100%" height="100%" debounce={0}>
@@ -358,7 +358,7 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.55fr_1fr]">
           <Card title="Environmental conditions" meta={`Daily mean, ${zoneLabel.toLowerCase()} · sample readings`}
-            actions={<CsvButton testId="export-env" onClick={() => downloadCsv(`verdant-environment-${fileTag}.csv`, [["date", "temp_c", "humidity_pct"], ...envSeries.map((e) => [e.date, e.temp, e.humidity])])} />}>
+            actions={<CsvButton testId="export-env" onClick={() => downloadCsv(`greenhouse-003-environment-${fileTag}.csv`, [["date", "temp_c", "humidity_pct"], ...envSeries.map((e) => [e.date, e.temp, e.humidity])])} />}>
             <div className="mb-2 flex gap-4 text-xs text-muted-foreground">
               <span className="flex items-center gap-1.5"><Thermometer className="h-3.5 w-3.5 text-[#B9755A]" />Temperature °C</span>
               <span className="flex items-center gap-1.5"><Droplets className="h-3.5 w-3.5 text-[#6B7B4F]" />Relative humidity %</span>
@@ -428,7 +428,7 @@ export default function Dashboard() {
             <select value={healthF} onChange={(e) => setHealthF(e.target.value as Health | "all")} data-testid="select-health" className="rounded-full border border-[#E6E2D6] bg-background px-3 py-1.5 text-sm font-semibold outline-none focus:border-[#A8B889]">
               <option value="all">All health</option><option value="thriving">Thriving</option><option value="watch">Watch</option><option value="stressed">Stressed</option>
             </select>
-            <CsvButton testId="export-table" onClick={() => downloadCsv(`verdant-collection-${fileTag}.csv`, [["code", "species", "variety", "zone", "stage", "plants", "sown", "height_cm", `growth_${range}d_cm`, "health", "issue"], ...rows.map(({ p, growth, height }) => [p.code, p.species, p.variety, zoneName(p.zone), p.stage, p.count, p.sownOn, height, growth.toFixed(1), HEALTH_META[p.health].label, p.issue ?? ""])])} />
+            <CsvButton testId="export-table" onClick={() => downloadCsv(`greenhouse-003-collection-${fileTag}.csv`, [["code", "species", "variety", "zone", "stage", "plants", "sown", "height_cm", `growth_${range}d_cm`, "health", "issue"], ...rows.map(({ p, growth, height }) => [p.code, p.species, p.variety, zoneName(p.zone), p.stage, p.count, p.sownOn, height, growth.toFixed(1), HEALTH_META[p.health].label, p.issue ?? ""])])} />
           </>}>
           <div className="fade-x overflow-x-auto">
             <table className="w-full min-w-[820px] border-collapse text-sm">
@@ -466,7 +466,7 @@ export default function Dashboard() {
             )}
           </div>
         </Card>
-        <p className="pb-4 text-center text-xs text-muted-foreground">Verdant demo · all figures generated from a fixed sample collection of {data.plants.length} batches. No sensors are connected.</p>
+        <p className="pb-4 text-center text-xs text-muted-foreground">Greenhouse #003 demo · all figures generated from a fixed sample collection of {data.plants.length} batches. No sensors are connected.</p>
       </main>
 
       <Dialog open={!!selected} onOpenChange={(o) => !o && setSelected(null)}>
@@ -490,7 +490,7 @@ export default function Dashboard() {
                 </div>
                 <div className="flex items-center justify-between">
                   <h4 className="text-sm font-bold">Growth history</h4>
-                  <CsvButton testId="export-plant" onClick={() => downloadCsv(`verdant-${p.code}-history.csv`, [["date", "height_cm"], ...series.map((s) => [s.date, s.height])])} />
+                  <CsvButton testId="export-plant" onClick={() => downloadCsv(`greenhouse-003-${p.code}-history.csv`, [["date", "height_cm"], ...series.map((s) => [s.date, s.height])])} />
                 </div>
                 <div className="h-[200px]">
                   <ResponsiveContainer width="100%" height="100%" debounce={0}>
